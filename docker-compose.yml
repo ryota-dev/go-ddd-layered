@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: local
+    ports:
+      - '8080:8080' # 必要に応じてポートを設定
+    volumes:
+      - ./:/workspace/go
+    depends_on:
+      - db
+    environment:
+      - ENV=local
+    command: bash -c "go mod tidy && air -c .air.toml"
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db

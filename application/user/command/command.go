@@ -3,14 +3,12 @@ package command
 import (
 	"go-ddd-layered/pkg/utils"
 	"io"
-	"time"
 )
 
 type (
 	RegisterUser struct {
-		Name     string
-		Email    string
-		Birthday time.Time
+		Name  string
+		Email string
 	}
 )
 
