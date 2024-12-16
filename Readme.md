@@ -17,3 +17,9 @@ make up
 ```bash
 make prepare
 ```
+
+## How to stop
+
+```bash
+make down
+```
