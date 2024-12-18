@@ -15,5 +15,12 @@ func main() {
 		panic(err)
 	}
 
+	for i := 0; i < 100; i++ {
+		db.Create(&dbmodel.User{
+			Name:  fmt.Sprintf("user-%d", i),
+			Email: fmt.Sprintf("user-%d@example.com", i),
+		})
+	}
+
 	fmt.Println("migration completed")
 }

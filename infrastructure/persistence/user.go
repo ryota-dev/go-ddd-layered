@@ -30,3 +30,23 @@ func (up *userPersistence) Register(ctx context.Context, user model.User) error 
 
 	return nil
 }
+
+func (up *userPersistence) List(ctx context.Context, page, perPage *int32) (users *[]model.User, err error) {
+	var defaultPage, defaultPerPage int32 = 1, 10
+	if page == nil {
+		page = &defaultPage
+	}
+	if perPage == nil {
+		perPage = &defaultPerPage
+	}
+
+	var dbUsers []dbmodel.User
+
+	if err := utils.Paginator(up.db, *page, *perPage).Find(&dbUsers).Error; err != nil {
+		return nil, err
+	}
+
+	utils.MarshalAndInsert(dbUsers, &users)
+
+	return users, nil
+}

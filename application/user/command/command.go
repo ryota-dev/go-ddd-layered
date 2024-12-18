@@ -7,8 +7,13 @@ import (
 
 type (
 	RegisterUser struct {
-		Name  string
-		Email string
+		Name  string `json:"name"`
+		Email string `json:"email"`
+	}
+
+	ListUser struct {
+		Page    *int32 `json:"page"`
+		PerPage *int32 `json:"perPage"`
 	}
 )
 

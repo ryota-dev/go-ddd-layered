@@ -15,4 +15,5 @@ func RegisterUserEndpoints(r *mux.Router, db *gorm.DB) {
 	userHandler := handler.NewUserHandler(userUsecase)
 
 	r.HandleFunc("/users", userHandler.HandleRegister).Methods("POST")
+	r.HandleFunc("/users", userHandler.HandleList).Methods("GET")
 }
